@@ -277,6 +277,29 @@ if (object.hasOwnProperty("key3") && object.hasOwnProperty("key10")) {
 property(myObject);
 
 //8
+/*
+* 1. Створіть функцію "findProductById" із двома параметрами:
+* - ID товару
+* - масив товарів
+*
+* 2. Функція повинна повернути товар із певним ID
+*
+* 3. Якщо товару з певним ID у масиві товарів немає,
+* функція має повернути "undefined"
+*
+* 4. Також всередині функції виведіть у консоль товар по ID
+
+  const products = [
+  { productId: 1355, name: 'phone' },
+  { productId: 5131, name: 'laptop' },
+  { productId: 6134, name: 'tablet' },
+]
+
+console.log(findProductById(6134, products)) // { postId: 6134, name: 'tablet' }
+
+console.log(findProductById(4511, products)) // undefined
+
+*/
 const products = [
  { productId: 1355, name: 'phone' },
  { productId: 5131, name: 'laptop' },
@@ -286,15 +309,23 @@ const products = [
 const findProductById = (products, id)=>{
  //создаем пустой массив в который будут записываться искомые свойства объектов
 let newlist =[];
+//оператор for of берет из нашего массива каждый объект со значением и подставляет его в константу product
 for(const product of products){
+//тут условие что если productId этого элемента будет равен аргументу нашей функции под названием id то мы пушим в массив 
+//newList тот объект который подошел под условие в противном случае возвращаем undefined
 if(product.productId == id ) newlist.push(product);
 else(console.log('undefined'));
 }
-//декомпозирование
+//декомпозирование то есть создаем новый список и присваиваем ему результат команды Object.entries(newlist[0]); которая 
+//переделает наш массив с объектом с двумя ключами и их значениями в один массив с двумя массивами в которых ключ и объект.
+//newlist[0] потому что в этом массиве обращаемся к первому и единственноме элементу то есть объекту
 const newlist1 = Object.entries(newlist[0]);
+// функция .forEach берет из нашего нового списка кадый ключ и значение из каждого массива
 newlist1.forEach (([key, value]) => {
+//тут отображаем этот каждый ключ и значение в виде таблицы
  console.table(key, value);
 });
+//возвращаем новый список
 return newlist1;
 
 };
