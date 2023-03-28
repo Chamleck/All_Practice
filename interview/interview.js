@@ -291,23 +291,72 @@ let items4 = [{
 //Если вы хотите отсортировать массив в порядке убывания, вы можете изменить оператор сравнения на > вместо < в операторе if, 
 //который проверяет, должен ли элемент находиться в левом подмассиве или в правом подмассиве.
 function quickSort(items) {
-    if (items4.length <= 1) {
+    if (items.length <= 1) {
         return items;
     }
 
-    const pivot = items4[0].price;
+    const pivot = items[0].price;
     const left = [];
     const right = [];
 
-    for (let i = 1; i < items4.length; i++) {
-        if (items4[i].price < pivot) {
-            left.push(items4[i]);
+    for (let i = 1; i < items.length; i++) {
+        if (items[i].price < pivot) {
+            left.push(items[i]);
         } else {
             right.push(items[i]);
         }
     }
-//это по сути новый конкатинированный массив
- return [...quickSort(left), {price: pivot}, ...quickSort(right)];
+    //повертаємо конкатинований масив який складається із двох підмасивів та опорним елементом
+    return [
+        ...quickSort(left),
+        {
+            name: items[0].name,
+            price: pivot
+        },
+        ...quickSort(right),
+    ];
+}
+console.log(quickSort(items4));
+
+//задание переработать этот массив с числами в объект в котором будет обозначено максимальное число, минимальное и среднее
+let arr = [1, 5, 2, 7, 3];
+
+function sort(arr){
+//проверка того что массив должен иметь больше чем одно значение, в противном случае его не нужно сортировать.
+    if(arr.length <= 1){
+        return arr;
+    }
+    let obj = {};
+    let sorted = arr.sort((a, b) => a - b);
+    obj.min = sorted[0];
+    obj.max = sorted[sorted.length-1];
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+//написать += это то же самое что sum = sum + arr[i] то есть мы присваиваем переменной sum новое значение каждую итерацию
+//сначала сумма равно нулю, потом она будет равняться 0 + первый елемент массива, затем во второй итерации она будет
+//ровняться уже 0 + первый елемент массива + второй элемент массива и так далее, пока не сложаться все значения в массиве и 
+//в конце цикла мы получим сумму всех значений
+    sum += arr[i];
+    }
+//вычисляем среднее арефметическое сумму всех числе делим на их количество в массиве ну и этот результат присваивается
+//как новый ключ и значение к нашему пустому объекту
+    obj.aver = sum/sorted.length;
+    return obj;
+}
+console.log(sort(arr));
+
+//нужно выбрать из массива четные значения и отсортировать их
+let arr = [4, 7, 2, 9, 8];
+
+const selectEven = (arr) => {
+    let evenArr = [];
+    for(let i = 0; i < arr.length; i++){
+        if(Number.isInteger(arr[i]) && arr[i] % 2 === 0){
+            evenArr.push(arr[i]);
+        }
+    }
+    let sortedArr = evenArr.sort((a,b) => b-a);
+    return sortedArr;
 }
 
-console.log(quickSort(items));
+console.log(selectEven(arr)); // Output: [8, 4, 2]
