@@ -33,22 +33,22 @@ let num1 = 1;
 let num2 = sum2(3, 10);
 console.log(num1 + num2)
 console.log(num1 + sum2(3, 10));
-//анонимные функции
+
 function someNamedFunction(a, b){
     let c = a + b;
     return с;
 };
-
+//анонимные функции
 function (a, b){
     let c = a + b;
     return с;
 }
-
+// анонимную функцию нужно присвоить переменной
 const anonimFunc = function (a, b){
     let c = a + b;
     return с;
 };
-
+//вызов анонимной функции
 console.log(anonimFunc(1, 2));
 
 //стрелочные функции
